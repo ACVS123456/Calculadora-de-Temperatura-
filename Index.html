@@ -1,1 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conversor de Temperatura</title>
+  <style>
+    * {
+      box-sized: caixa com borda;
+      família de fontes: "Poppins", sem serifa;
+    }
 
+    corpo {
+      fundo: gradiente-linear(135deg, #00b4db, #0083b0);
+      cor: #fff;
+      Exibir: flexível;
+      justificar-conteúdo: centralizado;
+      alinhamento-itens: centro;
+      altura: 100vh;
+      margem: 0;
+    }
+
+    .container {
+      fundo: rgba(255, 255, 255, 0.1);
+      preenchimento: 30px;
+      raio da borda: 20px;
+      largura: 90%;
+      largura máxima: 400px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      filtro de fundo: desfoque(10px);
+      alinhamento do texto: centralizado;
+    }
+
+    h1 {
+      margem-inferior: 20px;
+      tamanho da fonte: 1,8rem;
+      text-transform: maiúsculas;
+    }
+
+    entrada, selecione {
+      largura: 100%;
+      preenchimento: 12px;
+      margem: 10px 0;
+      fronteira: nenhuma;
+      raio da borda: 10px;
+      tamanho da fonte: 1rem;
+      Esboço: nenhum;
+    }
+
+    entrada {
+      alinhamento do texto: centralizado;
+    }
+
+    selecionar {
+      cor de fundo: #fff;
+      cor: #333;
+    }
+
+    botão {
+      cor de fundo: #00c6ff;
+      cor: #fff;
+      fronteira: nenhuma;
+      raio da borda: 10px;
+      preenchimento: 12px;
+      largura: 100%;
+      tamanho da fonte: 1,1rem;
+      cursor: ponteiro;
+      transição: fundo 0,3s;
+    }
+
+    botão:passar o mouse {
+      cor de fundo: #0072ff;
+    }
+
+    .resultado {
+      margem superior: 20px;
+      tamanho da fonte: 1,4rem;
+      peso da fonte: negrito;
+      fundo: rgba(255,255,255,0.2);
+      preenchimento: 10px;
+      raio da borda: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Conversor de Temperatura</h1>
+    <input type="number" id="valor" placeholder="Digite a temperatura" />
+    <select id="de">
+      <option value="c">Celsius (°C)</option>
+      <option value="f">Fahrenheit (°F)</option>
+      <option value="k">Kelvin (K)</option>
+    </select>
+    <select id="para">
+      <option value="f">Fahrenheit (°F)</option>
+      <option value="c">Celsius (°C)</option>
+      <option value="k">Kelvin (K)</option>
+    </select>
+    <button id="converter">Conversor</button>
+    <div class="resultado" id="resultado">O resultado aparecerá aqui</div>
+  </div>
+
+  <script>
+    const valor = document.getElementById('valor');
+    const de = document.getElementById('de');
+    const para = document.getElementById('para');
+    const resultado = document.getElementById('resultado');
+    const btn = document.getElementById('converter');
+
+    função converterTemp(temp, de, para) {
+      if (isNaN(temp)) return "Insira um número válido!";
+
+      que seja Celsius;
+
+      //Conversor tudo primeiro para Celsius
+      switch (de) {
+        caso 'c': celsius = temp; interromper;
+        caso 'f': celsius = (temp - 32) * 5 / 9; interromper;
+        caso 'k': celsius = temp - 273.15; interromper;
+      }
+
+      deixe resultado;
+      // Conversor de Celsius para a unidade desejada
+      switch (para) {
+        caso 'c': resultado = celsius; quebrar;
+        caso 'f': resultado = (celsius * 9/5) + 32; quebrar;
+        caso 'k': resultado = celsius + 273,15; quebrar;
+      }
+
+      retornar resultado.toFixed(2);
+    }
+
+    btn.addEventListener('click', () => {
+      const valorTemp = parseFloat(valor.value);
+      const resultadoFinal = conversorTemp(valorTemp, de.valor, para.valor);
+
+      resultado.textConteúdo =
+        isNaN(resultadoFinal)
+        "Insira um valor válido."
+        : `${valorTemp}°${de.value.toUpperCase()} = ${resultadoFinal}°${para.value.toUpperCase()}`;
+    });
+
+    //Conversão automática ao digitar
+    valor.addEventListener('input', () => btn.click());
+  </script>
+</body>
+</html>
